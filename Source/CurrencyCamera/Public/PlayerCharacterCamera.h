@@ -54,38 +54,41 @@ public:
 	// Sets default values for this character's properties
 	APlayerCharacterCamera();
 
-	UPROPERTY()
-		FDelegateTransformComplete DelegateRotationComplete;
+	UPROPERTY(BlueprintReadWrite);
+	float NativeArmLength;
 
 	UPROPERTY()
-		FDelegateTransformComplete DelegateMoveComplete;
+	FDelegateTransformComplete DelegateRotationComplete;
 
 	UPROPERTY()
-		FDelegateTransformComplete DelegateZoomComplete;
+	FDelegateTransformComplete DelegateMoveComplete;
 
 	UPROPERTY()
-		UCurveFloat* NullCurve = nullptr;
+	FDelegateTransformComplete DelegateZoomComplete;
+
+	UPROPERTY()
+	UCurveFloat* NullCurve = nullptr;
 
 	UFUNCTION(BlueprintCallable, Category = "CurrencyCamera|PlayerPawnCamera")
-		void SetCameraTransform(ETransformType TransformType, FTargetTransform TargetTransform, float TimelinePlayRate, UCurveFloat *NewCurveFloat, FDelegateTransformComplete Complete);
+	void SetCameraTransform(ETransformType TransformType, FTargetTransform TargetTransform, float TimelinePlayRate, UCurveFloat *NewCurveFloat, FDelegateTransformComplete Complete);
 
 	//蓝图重写此方法
 	UFUNCTION(BlueprintNativeEvent, Category = "CurrencyCamera|PlayerPawnCamera")
-		void BlueprintSetCameraTransform(ETransformType TransformType, FTargetTransform TargetTransform, float TimelinePlayRate, UCurveFloat *NewCurveFloat);
-		void BlueprintSetCameraTransform_Implementation(ETransformType TransformType, FTargetTransform TargetTransform, float TimelinePlayRate, UCurveFloat *NewCurveFloat);
+	void BlueprintSetCameraTransform(ETransformType TransformType, FTargetTransform TargetTransform, float TimelinePlayRate, UCurveFloat *NewCurveFloat);
+	void BlueprintSetCameraTransform_Implementation(ETransformType TransformType, FTargetTransform TargetTransform, float TimelinePlayRate, UCurveFloat *NewCurveFloat);
 
 	//蓝图调用下面三个方法触发委托
 	UFUNCTION(BlueprintCallable, Category = "CurrencyCamera|PlayerPawnCamera")
-		void RotationComplete();
+	void RotationComplete();
 
 	UFUNCTION(BlueprintCallable, Category = "CurrencyCamera|PlayerPawnCamera")
-		void MoveComplete();
+	void MoveComplete();
 
 	UFUNCTION(BlueprintCallable, Category = "CurrencyCamera|PlayerPawnCamera")
-		void ZoomComplete();
+	void ZoomComplete();
 
 	UFUNCTION(BlueprintCallable, Category = "CurrencyCamera|PlayerPawnCamera")
-		void ClearAllBind();
+	void ClearAllBind();
 
 protected:
 	// Called when the game starts or when spawned
